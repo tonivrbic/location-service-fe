@@ -1,0 +1,108 @@
+.login-container {
+  background-color: #d9d9d9;
+  min-height: 100%;
+}
+
+.logo {
+  position: relative;
+  height: 3em;
+}
+
+.logo__img {
+  width: 4em;
+  z-index: 10;
+  position: absolute;
+  left: 1.375em;
+  top: 1em;
+}
+
+.logo__romb {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -14.75em;
+    left: -5em;
+    width: 12em;
+    height: 12em;
+    z-index: 5;
+    background-color: #e60000;
+    transform-origin: 0 100%;
+    border-radius: 2em;
+    transform: rotate(45deg)
+  }
+}
+
+.logo__title {
+  position: absolute;
+  left: 3em;
+  color: #e60000;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0;
+  top: 0.75em;
+}
+
+.login {
+  box-sizing: border-box;
+  padding: 2em;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__title {
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+.login__description {
+  color: #444;
+}
+
+
+.login__input {
+  width: 100%;
+}
+
+.login__button {
+  font-size: 1.25em;
+  height: 2.5em;
+  width: 100%;
+  margin-top: 2em;
+}
+
+.login__spinner {
+  visibility: hidden;
+  margin: 1em;
+  height: 2em;
+}
+
+.login__spinner--visible {
+  visibility: visible;
+}
+
+.login__link {
+  margin-top: 2em;
+  color: #444;
+}
+
+.login__error {
+  width: 100%;
+  color: red;
+  height: 1.5em;
+  visibility: hidden;
+}
+
+.login__error--visible {
+  visibility: visible;
+}
+
+.login__error--big {
+  padding: 0.5em 0;
+}

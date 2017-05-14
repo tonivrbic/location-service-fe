@@ -1,3 +1,9 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <img [src]="(user | async)?.photoURL" height="20">
+  <div>{{(user | async)?.displayName}}</div>
+  <button md-button (click)="logout()">Logout</button>
+</md-toolbar>
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+<router-outlet></router-outlet>
