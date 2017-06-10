@@ -1,9 +1,26 @@
-<md-toolbar color="primary">
-  <img [src]="(user | async)?.photoURL" height="20">
-  <div>{{(user | async)?.displayName}}</div>
-  <button md-button (click)="logout()">Logout</button>
-</md-toolbar>
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
-<router-outlet></router-outlet>
+<md-sidenav-container>
+  <md-sidenav #sidenav mode="side" opened>
+    <md-nav-list>
+      <md-list-item>
+        Add device
+      </md-list-item>
+    </md-nav-list>
+  </md-sidenav>
+  <md-toolbar color="primary" class="toolbar__wrapper">
+    <div class="toolbar">
+      <button md-icon-button (click)="sidenav.toggle()"><md-icon>menu</md-icon></button>
+      <div class="toolbar__account">
+        <img *ngIf="(user | async)?.photoURL" class="toolbar__avatar" [src]="(user | async)?.photoURL" height="24">
+        <div class="toolbar__name">{{(user | async)?.displayName}}</div>
+        <button md-icon-button [mdMenuTriggerFor]="logoutMenu"><md-icon>more_vert</md-icon></button>
+      </div>
+    </div>
+  </md-toolbar>
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  <router-outlet></router-outlet>
+  <md-menu #logoutMenu [overlapTrigger]="false">
+    <button md-menu-item (click)="logout()">Logout</button>
+  </md-menu>
+</md-sidenav-container>

@@ -10,3 +10,30 @@
   height: 100%;
   display: block;
 }
+
+.toolbar__account {
+  display: inline-flex;
+  align-items: center;
+}
+
+.toolbar__wrapper {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.toolbar__avatar {
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.toolbar__name {
+  font-size: 0.85em;
+  padding-left: 0.5em;
+}
