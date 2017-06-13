@@ -1,15 +1,63 @@
 <div class="login">
   <div class="login__overlay"></div>
-  <md-card>
-    <md-card-header>
-      <md-card-title>
-        <h1>Login</h1>
-      </md-card-title>
-      <md-card-subtitle>You must be logged in to use the application</md-card-subtitle>
-    </md-card-header>
-    <md-card-content class="login__buttons">
-      <button class="google-login-button" md-button (click)="login()">LOGIN</button>
-      <button class="facebook-login-button" md-button (click)="loginWithFacebook()">Log in With Facebook</button>
-    </md-card-content>
-  </md-card>
+  <md-tab-group class="login__box">
+    <md-tab label="Login">
+      <md-card>
+        <md-card-header>
+          <md-card-title>
+            <h1>Login</h1>
+          </md-card-title>
+          <md-card-subtitle>You must be logged in to use the application</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <form class="login__form" (ngSubmit)="loginAccount(loginEmail,loginPassword)" name="loginForm">
+            <p class="login__error">{{loginErrorMessage}}</p>
+            <div>
+              <md-input-container class="login__input">
+                <input mdInput placeholder="Email" type="email" [(ngModel)]="loginEmail" name="email">
+              </md-input-container>
+            </div>
+            <div>
+              <md-input-container class="login__input">
+                <input mdInput placeholder="Password" type="password" [(ngModel)]="loginPassword" name="password">
+              </md-input-container>
+            </div>
+            <button md-raised-button color="primary">LOG IN</button>
+          </form>
+          <md-divider></md-divider>
+          <p class="login__divider">Or log in with a third party service</p>
+          <div class="login__buttons">
+            <button class="google-login-button" md-button (click)="loginWithGoogle()">LOGIN</button>
+            <button class="facebook-login-button" md-button (click)="loginWithFacebook()">Log in With Facebook</button>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+    <md-tab label="Register">
+      <md-card>
+        <md-card-header>
+          <md-card-title>
+            <h1>Register</h1>
+          </md-card-title>
+          <md-card-subtitle>Create an account to use the application.</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <p class="login__error">{{registerErrorMessage}}</p>
+          <form (ngSubmit)="registerAccount(registerEmail,registerPassword)" name="registerForm">
+            <div>
+              <md-input-container class="login__input">
+                <input mdInput placeholder="Email" type="email" [(ngModel)]="registerEmail" name="email">
+              </md-input-container>
+            </div>
+            <div>
+              <md-input-container class="login__input">
+                <input mdInput placeholder="Password" type="password" [(ngModel)]="registerPassword" name="password">
+              </md-input-container>
+            </div>
+            <button md-raised-button color="primary">REGISTER</button>
+          </form>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+  </md-tab-group>
 </div>

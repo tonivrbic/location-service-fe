@@ -13,10 +13,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from 'app/login/login.component';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { environment } from 'environments/environment';
+import { DevicesService } from 'app/devices/devices.service';
+import { AddDeviceComponent } from './devices/add-device/add-device.component';
+import { ListDevicesComponent } from './devices/list-devices/list-devices.component';
+import { EditDeviceComponent } from './devices/edit-device/edit-device.component';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from 'app/reducers/app.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent
+    AppComponent, LoginComponent, AddDeviceComponent, ListDevicesComponent, EditDeviceComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +35,10 @@ import { environment } from 'environments/environment';
       apiKey: 'AIzaSyCKb-hVu7N2XQHpq2dR-mWOTaqSxfOjP7U'
     }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    StoreModule.provideStore({ 'app': appReducer })
   ],
-  providers: [],
+  providers: [DevicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

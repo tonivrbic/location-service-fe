@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
+import { DevicesService } from 'app/devices/devices.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +12,15 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  center: Observable<{}>;
+  devices: any;
   user: Observable<firebase.User>;
   isLoggedIn: boolean;
-  lat = 51.678418;
-  lng = 7.809007;
+  lat = 45.554526;
+  lng = 18.686759;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private router: Router,
+    private devicesService: DevicesService, private store: Store<string>) {
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(auth => {
       if (auth == null) {
@@ -26,13 +31,15 @@ export class AppComponent {
         console.log('Successfully Logged in.');
         auth.getToken().then(token => {
           console.log(token);
+          this.getDevices();
         });
         this.isLoggedIn = true;
-        // UPDATE: I forgot this at first. Without it when a user is logged in and goes directly to /login
-        // the user did not get redirected to the home page.
         this.router.navigate(['']);
+
       }
     });
+
+    this.center = this.store.select('app');
   }
 
 
@@ -42,5 +49,11 @@ export class AppComponent {
 
   isRouteActive(route: string) {
     return this.router.isActive(route, true);
+  }
+
+  getDevices() {
+    this.devicesService.getDevices().subscribe(data => {
+      this.devices = data;
+    });
   }
 }

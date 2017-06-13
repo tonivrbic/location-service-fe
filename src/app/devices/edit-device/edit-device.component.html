@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="overlay"></div>
+  <form name="editDeviceForm" (ngSubmit)="editDeviceForm.form.valid && saveDevice()" #editDeviceForm="ngForm">
+    <md-card class="content">
+      <md-card-header>
+        <md-card-title>Edit device {{device.name}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <div>
+          <md-input-container>
+            <input mdInput placeholder="Name" [(ngModel)]="device.name" name="name" required minlength="3">
+          </md-input-container>
+        </div>
+        <div>
+          <md-input-container>
+            <input mdInput placeholder="Icon" [(ngModel)]="device.icon" name="icon" required>
+          </md-input-container>
+        </div>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button color="primary" [disabled]="buttonDisabled">SAVE</button>
+        <a md-button routerLink="/">CANCEL</a>
+      </md-card-actions>
+    </md-card>
+  </form>
+</div>

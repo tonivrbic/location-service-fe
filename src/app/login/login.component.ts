@@ -9,18 +9,37 @@ import * as firebase from 'firebase/app';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-
   user: Observable<firebase.User>;
+  registerEmail: string;
+  registerPassword: string;
+  registerErrorMessage: string;
+  loginEmail: string;
+  loginPassword: string;
+  loginErrorMessage: string;
 
   constructor(public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
   }
 
-  login() {
+  loginWithGoogle() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   loginWithFacebook() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
+
+  loginAccount(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .catch(err => {
+        this.loginErrorMessage = err.message;
+      });
+  }
+
+  registerAccount(email: string, password: string) {
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .catch(err => {
+        this.registerErrorMessage = err.message;
+      });
   }
 }
