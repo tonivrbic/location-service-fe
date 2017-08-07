@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { DevicesService } from 'app/devices/devices.service';
 import { Store } from '@ngrx/store';
+import { SET_DEVICES } from 'app/reducers/devices.reducer';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,13 @@ export class AppComponent {
   isLoggedIn: boolean;
   lat = 45.554526;
   lng = 18.686759;
+  listExpanded = true;
 
   constructor(private afAuth: AngularFireAuth, private router: Router,
     private devicesService: DevicesService, private store: Store<string>) {
+
+    this.center = this.store.select('app');
+    this.store.select('devices').subscribe(devices => this.devices = devices);
     this.user = this.afAuth.authState;
     this.afAuth.authState.subscribe(auth => {
       if (auth == null) {
@@ -31,15 +36,16 @@ export class AppComponent {
         console.log('Successfully Logged in.');
         auth.getToken().then(token => {
           console.log(token);
-          this.getDevices();
+          this.devicesService.getDevices().subscribe(data => {
+            const devices = data.sort((a, b) => a.name > b.name);
+            this.store.dispatch({ type: SET_DEVICES, payload: devices });
+          });
         });
         this.isLoggedIn = true;
         this.router.navigate(['']);
 
       }
     });
-
-    this.center = this.store.select('app');
   }
 
 
@@ -49,11 +55,5 @@ export class AppComponent {
 
   isRouteActive(route: string) {
     return this.router.isActive(route, true);
-  }
-
-  getDevices() {
-    this.devicesService.getDevices().subscribe(data => {
-      this.devices = data;
-    });
   }
 }

@@ -1,0 +1,18 @@
+<agm-map [latitude]="(center | async).latitude" [longitude]="(center | async).longitude" [zoom]="(center | async).zoom" [streetViewControl]="false">
+  <agm-marker *ngFor="let device of devices" [latitude]="device.latitude" [longitude]="device.longitude" [title]="device.name"
+    [iconUrl]="'assets/icons/' + device.icon + '.png'"></agm-marker>
+</agm-map>
+<md-card class="list-control">
+  <a routerLink="/add" md-button>
+    <md-icon>add_circle</md-icon>
+    <span>Add device</span>
+  </a>
+  <button md-icon-button (click)="listExpanded = !listExpanded" mdTooltip="Toggle list" mdTooltipShowDelay="800">
+    <md-icon>{{listExpanded ? 'expand_more': 'expand_less'}}</md-icon>
+  </button>
+</md-card>
+<md-card class="devices-list">
+  <md-divider></md-divider>
+  <app-list-devices [ngClass]="{'list-hidden':!listExpanded}" [devices]="devices"></app-list-devices>
+</md-card>
+<router-outlet></router-outlet>

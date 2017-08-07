@@ -1,44 +1,5 @@
-.routes-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+.sebm-google-map-container {
   height: 100%;
-  display: block;
-}
-
-.toolbar__account,
-.toolbar__title {
-  display: inline-flex;
-  align-items: center;
-}
-
-.toolbar__menu {
-  margin-right: 1em;
-}
-
-.toolbar__wrapper {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
-}
-
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.toolbar__avatar {
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.toolbar__name {
-  font-size: 0.85em;
-  padding-left: 0.5em;
-  display: none;
 }
 
 .devices-list {
@@ -79,8 +40,5 @@
     max-width: 20em;
     max-height: calc(100vh - 10.5em);
     top: 8.5em;
-  }
-  .toolbar__name {
-    display: inline-block;
   }
 }

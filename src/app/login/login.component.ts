@@ -22,11 +22,17 @@ export class LoginComponent {
   }
 
   loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .catch(err => {
+        this.loginErrorMessage = err.message;
+      });
   }
 
   loginWithFacebook() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .catch(err => {
+        this.loginErrorMessage = err.message;
+      });
   }
 
   loginAccount(email: string, password: string) {

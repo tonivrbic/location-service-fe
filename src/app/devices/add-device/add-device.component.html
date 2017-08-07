@@ -12,10 +12,18 @@
             <input mdInput placeholder="Name" [(ngModel)]="device.name" name="name" required minlength="3">
           </md-input-container>
         </div>
-        <div>
-          <md-input-container>
-            <input mdInput placeholder="Icon" [(ngModel)]="device.icon" name="icon" required>
-          </md-input-container>
+        <div class="icon-select">
+          <md-select placeholder="Icon" [(ngModel)]="device.icon" name="icon" required>
+            <md-option value="boy">Boy</md-option>
+            <md-option value="car">Car</md-option>
+            <md-option value="cat">Cat</md-option>
+            <md-option value="dog">Dog</md-option>
+            <md-option value="girl">Girl</md-option>
+            <md-option value="lion">Lion</md-option>
+            <md-option value="man">Man</md-option>
+            <md-option value="woman">Woman</md-option>
+          </md-select>
+          <img class="icon" [src]="'assets/icons/' + device.icon + '.png' || ''" [alt]="device.icon">
         </div>
       </md-card-content>
       <md-card-actions>

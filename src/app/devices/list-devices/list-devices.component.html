@@ -1,6 +1,6 @@
 <md-nav-list dense>
   <md-list-item *ngFor="let device of devices" (click)="selectDevice(device)">
-    <img md-list-avatar [src]="'https://api.adorable.io/avatars/128/'+device.name" alt="">
+    <img md-list-avatar [src]="'assets/icons/' + device.icon + '.png'" alt="">
     <span md-line>{{device.name}}</span>
     <span md-line>{{device.address}}</span>
     <span md-line>{{device.date | date:'medium'}}</span>
@@ -10,6 +10,8 @@
   </md-list-item>
 </md-nav-list>
 <md-menu #menu="mdMenu">
+  <a [routerLink]="['history', activeItem]" md-menu-item>
+    <md-icon>history</md-icon>Show history</a>
   <a [routerLink]="['edit', activeItem]" md-menu-item>
     <md-icon>edit</md-icon>Edit</a>
   <button md-menu-item (click)="deleteDevice(activeItem)"><md-icon>delete</md-icon>Delete</button>

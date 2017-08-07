@@ -1,7 +1,9 @@
+import { Store } from '@ngrx/store';
 import { DevicesService } from '../devices.service';
 import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SET_DEVICES } from 'app/reducers/devices.reducer';
 
 @Component({
   selector: 'app-edit-device',
@@ -21,7 +23,7 @@ export class EditDeviceComponent implements OnInit {
   id;
   buttonDisabled = false;
   constructor(private devicesService: DevicesService, private snackBar: MdSnackBar,
-    private route: ActivatedRoute, private router: Router) { }
+    private route: ActivatedRoute, private router: Router, private store: Store<any>) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -39,6 +41,10 @@ export class EditDeviceComponent implements OnInit {
         duration: 4000,
       });
       this.buttonDisabled = false;
+      this.devicesService.getDevices().subscribe(data => {
+        const devices = data.sort((a, b) => a.name > b.name);
+        this.store.dispatch({ type: SET_DEVICES, payload: devices });
+      });
     }, err => {
       this.snackBar.open(`Error: ${err}`, '', {
         duration: 5000,

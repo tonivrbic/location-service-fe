@@ -1,36 +1,24 @@
-<md-sidenav-container>
-  <md-sidenav #sidenav mode="side">
-    <md-nav-list>
-      <a md-list-item routerLink="/add">
-        <md-icon md-list-icon>add_circle</md-icon>
-        <span md-line>Add device</span>
-      </a>
-    </md-nav-list>
-  </md-sidenav>
-  <md-toolbar color="primary" class="toolbar__wrapper">
-    <div class="toolbar">
-      <div class="toolbar__title">
-        <button md-icon-button (click)="sidenav.toggle()" class="toolbar__menu"><md-icon>menu</md-icon></button>
-        <span>Location services</span>
-      </div>
-      <div class="toolbar__account">
-        <button md-icon-button [mdMenuTriggerFor]="logoutMenu" *ngIf="(user | async)?.uid">
-          <img [src]="(user | async)?.photoURL || 'assets/user_avatar.png'" height="32" class="toolbar__avatar">
-        </button>
-      </div>
+<md-toolbar color="primary" class="toolbar__wrapper">
+  <div class="toolbar">
+    <div class="toolbar__title">
+      <span>Location services</span>
     </div>
-  </md-toolbar>
-  <agm-map [latitude]="(center | async).latitude" [longitude]="(center | async).longitude" [zoom]="(center | async).zoom">
-    <agm-marker *ngFor="let device of devices" [latitude]="device.latitude" [longitude]="device.longitude"></agm-marker>
-  </agm-map>
-  <md-card class="devices-list">
-    <app-list-devices [devices]="devices"></app-list-devices>
-  </md-card>
-  <md-menu #logoutMenu [overlapTrigger]="false">
-    <span md-menu-item>
+    <div class="toolbar__account">
+      <span class="toolbar__name">{{(user | async)?.displayName || (user | async)?.email}}</span>
+      <button md-icon-button [mdMenuTriggerFor]="logoutMenu" *ngIf="(user | async)?.uid">
+        <img [src]="(user | async)?.photoURL || 'assets/user_avatar.png'" height="32" class="toolbar__avatar">
+      </button>
+    </div>
+  </div>
+</md-toolbar>
+<md-menu #logoutMenu [overlapTrigger]="false">
+  <span md-menu-item>
       <md-icon>account_circle</md-icon>{{(user | async)?.displayName || (user | async)?.email}}
     </span>
-    <button md-menu-item (click)="logout()"><md-icon>exit_to_app</md-icon>Logout</button>
-  </md-menu>
-</md-sidenav-container>
+  <span md-menu-item>
+      <md-icon>info</md-icon>About
+    </span>
+  <md-divider></md-divider>
+  <button md-menu-item (click)="logout()"><md-icon>exit_to_app</md-icon>Logout</button>
+</md-menu>
 <router-outlet></router-outlet>

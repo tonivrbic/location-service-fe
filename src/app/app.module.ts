@@ -19,10 +19,14 @@ import { ListDevicesComponent } from './devices/list-devices/list-devices.compon
 import { EditDeviceComponent } from './devices/edit-device/edit-device.component';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from 'app/reducers/app.reducer';
+import { devicesReducer } from 'app/reducers/devices.reducer';
+import { MainComponent } from './main/main.component';
+import { HistoryComponent } from './history/history.component';
+import { HistoryService } from 'app/history/history.service';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, AddDeviceComponent, ListDevicesComponent, EditDeviceComponent
+    AppComponent, LoginComponent, AddDeviceComponent, ListDevicesComponent, EditDeviceComponent, MainComponent, HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +40,9 @@ import { appReducer } from 'app/reducers/app.reducer';
     }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    StoreModule.provideStore({ 'app': appReducer })
+    StoreModule.provideStore({ 'app': appReducer, 'devices': devicesReducer })
   ],
-  providers: [DevicesService],
+  providers: [DevicesService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

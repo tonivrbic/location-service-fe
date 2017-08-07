@@ -12,6 +12,7 @@ import { SET_POSITION } from 'app/reducers/app.reducer';
 export class ListDevicesComponent implements OnInit {
   @Input() devices;
   activeItem = 0;
+  showSpinner = true;
   constructor(private devicesService: DevicesService, private snackBar: MdSnackBar,
     private store: Store<string>) { }
 
@@ -35,7 +36,7 @@ export class ListDevicesComponent implements OnInit {
       type: SET_POSITION, payload: {
         latitude: device.latitude,
         longitude: device.longitude,
-        zoom: 15
+        zoom: 17
       }
     });
   }

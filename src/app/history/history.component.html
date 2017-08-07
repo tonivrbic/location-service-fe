@@ -1,0 +1,7 @@
+<agm-map [latitude]="(center | async).latitude" [longitude]="(center | async).longitude" [zoom]="(center | async).zoom" [streetViewControl]="false">
+  <agm-polyline strokeColor="red">
+    <agm-polyline-point *ngFor="let point of historyData" [longitude]="point.longitude" [latitude]="point.latitude"></agm-polyline-point>
+  </agm-polyline>
+</agm-map>
+<md-card class="list-control">
+</md-card>
