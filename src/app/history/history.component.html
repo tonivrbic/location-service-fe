@@ -3,5 +3,19 @@
     <agm-polyline-point *ngFor="let point of historyData" [longitude]="point.longitude" [latitude]="point.latitude"></agm-polyline-point>
   </agm-polyline>
 </agm-map>
-<md-card class="list-control">
+<md-card class="details-box">
+  <md-card-header>
+    <img md-card-avatar [src]="'assets/icons/' + (device | async)?.icon + '.png' || ''">
+    <span md-card-title>{{(device | async)?.name}}</span>
+    <span md-card-subtitle>{{(device | async)?.address}}</span>
+  </md-card-header>
+  <md-divider></md-divider>
+  <md-card-content class="details-box__content">
+    <md-input-container class="input-container">
+      <input mdInput class="input" type="date" placeholder="Start date" [(ngModel)]="fromDate" (change)="loadHist()">
+    </md-input-container>
+    <md-input-container class="input-container">
+      <input mdInput class="input" type="date" placeholder="End date" [(ngModel)]="toDate" (change)="loadHist()">
+    </md-input-container>
+  </md-card-content>
 </md-card>

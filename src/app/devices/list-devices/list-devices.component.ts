@@ -1,8 +1,10 @@
+import { SET_DEVICES } from '../../reducers/devices.reducer';
 import { DevicesService } from '../devices.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBar, MdDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { SET_POSITION } from 'app/reducers/app.reducer';
+import { DeleteDialogComponent } from 'app/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-list-devices',
@@ -14,20 +16,34 @@ export class ListDevicesComponent implements OnInit {
   activeItem = 0;
   showSpinner = true;
   constructor(private devicesService: DevicesService, private snackBar: MdSnackBar,
-    private store: Store<string>) { }
+    private store: Store<string>, private dialog: MdDialog) { }
 
   ngOnInit() {
   }
 
   deleteDevice(id) {
-    this.devicesService.deleteDevice(id).subscribe(data => {
-      this.snackBar.open(`Device deleted`, '', {
-        duration: 4000,
-      });
-    }, err => {
-      this.snackBar.open(`Error: ${err}`, '', {
-        duration: 5000,
-      });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: {
+        id: id,
+        name: this.devices.filter(x => x.id === id)[0].name
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.devicesService.deleteDevice(id).subscribe(data => {
+          this.snackBar.open(`Device deleted`, '', {
+            duration: 4000,
+          });
+          this.devicesService.getDevices().subscribe(data => {
+            const devices = data.sort((a, b) => a.name > b.name);
+            this.store.dispatch({ type: SET_DEVICES, payload: devices });
+          });
+        }, err => {
+          this.snackBar.open(`Error: ${err}`, '', {
+            duration: 5000,
+          });
+        });
+      }
     });
   }
 

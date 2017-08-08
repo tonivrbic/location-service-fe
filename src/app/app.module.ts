@@ -23,11 +23,13 @@ import { devicesReducer } from 'app/reducers/devices.reducer';
 import { MainComponent } from './main/main.component';
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from 'app/history/history.service';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, AddDeviceComponent, ListDevicesComponent, EditDeviceComponent, MainComponent, HistoryComponent
+    AppComponent, LoginComponent, AddDeviceComponent, ListDevicesComponent, EditDeviceComponent, MainComponent, HistoryComponent, DeleteDialogComponent
   ],
+  entryComponents: [DeleteDialogComponent],
   imports: [
     BrowserModule,
     FormsModule,
