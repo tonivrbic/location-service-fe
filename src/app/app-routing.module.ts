@@ -6,7 +6,8 @@ import { LoginComponent } from 'app/login/login.component';
 import { AddDeviceComponent } from 'app/devices/add-device/add-device.component';
 import { EditDeviceComponent } from 'app/devices/edit-device/edit-device.component';
 import { MainComponent } from 'app/main/main.component';
-import { HistoryComponent } from "app/history/history.component";
+import { HistoryComponent } from 'app/history/history.component';
+import { AboutComponent } from 'app/about/about.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,12 @@ const routes: Routes = [
   {
     path: 'history/:id',
     component: HistoryComponent
-  }
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

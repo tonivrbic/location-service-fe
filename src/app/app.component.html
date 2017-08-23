@@ -16,9 +16,9 @@
   <span md-menu-item>
       <md-icon>account_circle</md-icon>{{(user | async)?.displayName || (user | async)?.email}}
     </span>
-  <span md-menu-item>
-      <md-icon>info</md-icon>About
-    </span>
+  <a md-menu-item routerLink="about">
+    <md-icon>info</md-icon>About
+  </a>
   <md-divider></md-divider>
   <button md-menu-item (click)="logout()"><md-icon>exit_to_app</md-icon>Logout</button>
 </md-menu>

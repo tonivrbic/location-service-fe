@@ -28,8 +28,8 @@ export class HistoryComponent implements OnInit {
     this.route.params.subscribe(param => {
       const id = param['id'];
       this.id = id;
-      const from = new Date(Date.now() - 1000 * 60 * 60 * 30);
-      const to = new Date(Date.now() + 1000 * 60 * 60 * 30);
+      const from = new Date(this.fromDate);
+      const to = new Date(this.toDate);
 
       this.afAuth.authState.subscribe(auth => {
         if (auth !== null) {

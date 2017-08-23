@@ -3,7 +3,7 @@ import { BrowserModule, } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdDialogModule } from '@angular/material';
 
 import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
@@ -24,10 +24,19 @@ import { MainComponent } from './main/main.component';
 import { HistoryComponent } from './history/history.component';
 import { HistoryService } from 'app/history/history.service';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, AddDeviceComponent, ListDevicesComponent, EditDeviceComponent, MainComponent, HistoryComponent, DeleteDialogComponent
+    AppComponent,
+    LoginComponent,
+    AddDeviceComponent,
+    ListDevicesComponent,
+    EditDeviceComponent,
+    MainComponent,
+    HistoryComponent,
+    DeleteDialogComponent,
+    AboutComponent
   ],
   entryComponents: [DeleteDialogComponent],
   imports: [
