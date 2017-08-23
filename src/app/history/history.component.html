@@ -9,7 +9,6 @@
     <span md-card-title>{{(device | async)?.name}}</span>
     <span md-card-subtitle>{{(device | async)?.address}}</span>
   </md-card-header>
-  <md-divider></md-divider>
   <md-card-content class="details-box__content">
     <md-input-container class="input-container">
       <input mdInput class="input" type="date" placeholder="Start date" [(ngModel)]="fromDate" (change)="loadHist()">

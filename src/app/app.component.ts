@@ -20,6 +20,7 @@ export class AppComponent {
   lat = 45.554526;
   lng = 18.686759;
   listExpanded = true;
+  showBackButton: false;
 
   constructor(private afAuth: AngularFireAuth, private router: Router,
     private devicesService: DevicesService, private store: Store<string>) {
@@ -55,5 +56,9 @@ export class AppComponent {
 
   isRouteActive(route: string) {
     return this.router.isActive(route, true);
+  }
+
+  goBack() {
+    history.back();
   }
 }

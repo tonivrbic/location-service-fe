@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Http, Headers, Response } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
@@ -20,31 +21,31 @@ export class DevicesService {
   }
 
   getDevices(): Observable<any> {
-    return this.http.get('http://localhost:52591/api/devices', { headers: this.headers })
+    return this.http.get(environment.baseUrl + '/api/devices', { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getDevice(id): Observable<any> {
-    return this.http.get('http://localhost:52591/api/devices/' + id, { headers: this.headers })
+    return this.http.get(environment.baseUrl + '/api/devices/' + id, { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   deleteDevice(id): Observable<any> {
-    return this.http.delete('http://localhost:52591/api/devices/' + id, { headers: this.headers })
+    return this.http.delete(environment.baseUrl + '/api/devices/' + id, { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   addDevice(data): Observable<any> {
-    return this.http.post('http://localhost:52591/api/devices', data, { headers: this.headers })
+    return this.http.post(environment.baseUrl + '/api/devices', data, { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   saveDevice(id, data): Observable<any> {
-    return this.http.put('http://localhost:52591/api/devices/' + id, data, { headers: this.headers })
+    return this.http.put(environment.baseUrl + '/api/devices/' + id, data, { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);
   }

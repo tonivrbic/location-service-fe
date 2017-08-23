@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Http, Headers, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -18,7 +19,7 @@ export class HistoryService {
   }
 
   getHistoryForDevice(id, from: Date, to: Date): Observable<any> {
-    return this.http.get('http://localhost:52591/api/history/' + id + `?from=${from.toISOString()}&to=${to.toISOString()}`,
+    return this.http.get(environment.baseUrl + '/api/history/' + id + `?from=${from.toISOString()}&to=${to.toISOString()}`,
       { headers: this.headers })
       .map(this.extractData)
       .catch(this.handleError);

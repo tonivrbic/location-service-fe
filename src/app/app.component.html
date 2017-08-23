@@ -1,7 +1,8 @@
 <md-toolbar color="primary" class="toolbar__wrapper">
   <div class="toolbar">
     <div class="toolbar__title">
-      <img class="toolbar__logo" src="assets/logo.png" alt="Logo">
+      <img class="toolbar__logo" src="assets/logo.png" alt="Logo" *ngIf="isRouteActive('')">
+      <button class="toolbar__button" md-icon-button *ngIf="!isRouteActive('')" (click)="goBack()"><md-icon>arrow_back</md-icon></button>
       <span>Location services</span>
     </div>
     <div class="toolbar__account">
